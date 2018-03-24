@@ -3,10 +3,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>lv.merrill.apprentissage</groupId>
 	<artifactId>api-gateway</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>api-gateway</name>
 
 	<dependencyManagement>
@@ -103,6 +101,10 @@
 		<maven.compiler.target>9</maven.compiler.target>
 
 		<jersey.version>2.26</jersey.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<parent>
+		<groupId>lv.merrill.app</groupId>
+		<artifactId>app</artifactId>
+		<version>1.0</version>
+	</parent>
 </project>
