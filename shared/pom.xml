@@ -2,25 +2,6 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<dependencies>
-		<dependency>
-			<groupId>javax.jms</groupId>
-			<artifactId>javax.jms-api</artifactId>
-			<version>2.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.json</groupId>
-			<artifactId>javax.json-api</artifactId>
-			<version>1.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.glassfish</groupId>
-			<artifactId>javax.json</artifactId>
-			<version>1.1</version>
-		</dependency>
-	</dependencies>
 	<parent>
 		<groupId>lv.merrill.app</groupId>
 		<artifactId>app</artifactId>
@@ -31,5 +12,6 @@
 	<modules>
 		<module>shared-ms</module>
 		<module>shared-domain</module>
+		<module>couchdb-client</module>
 	</modules>
 </project>

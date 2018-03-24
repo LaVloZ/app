@@ -10,6 +10,21 @@
 		<maven.compiler.source>9</maven.compiler.source>
 		<maven.compiler.target>9</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<lib.version.qpid>0.32</lib.version.qpid>
+		<lib.version.jms>2.0.1</lib.version.jms>
+
+		<lib.version.jsonb>1.0</lib.version.jsonb>
+		<lib.version.yasson>1.0</lib.version.yasson>
+		<lib.version.json>1.1</lib.version.json>
+		<lib.version.httpcomponents>4.5.4</lib.version.httpcomponents>
+		<lib.version.commons.io>2.6</lib.version.commons.io>
+		<lib.version.junit>4.12</lib.version.junit>
+
+		<plugin.version.exec>1.2.1</plugin.version.exec>
+
+		<lib.version.assertj>3.9.0</lib.version.assertj>
+		<framework.version.junit.jupiter>5.1.0</framework.version.junit.jupiter>
 	</properties>
 
 	<modules>
@@ -17,4 +32,70 @@
 		<module>shared</module>
 		<module>user</module>
 	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.qpid</groupId>
+				<artifactId>qpid-amqp-1-0-client-jms</artifactId>
+				<version>${lib.version.qpid}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.jms</groupId>
+				<artifactId>javax.jms-api</artifactId>
+				<version>${lib.version.jms}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.json.bind</groupId>
+				<artifactId>javax.json.bind-api</artifactId>
+				<version>${lib.version.jsonb}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.eclipse</groupId>
+				<artifactId>yasson</artifactId>
+				<version>${lib.version.yasson}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.glassfish</groupId>
+				<artifactId>javax.json</artifactId>
+				<version>${lib.version.json}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${lib.version.httpcomponents}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${lib.version.commons.io}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>${framework.version.junit.jupiter}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>${framework.version.junit.jupiter}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>${lib.version.assertj}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>
