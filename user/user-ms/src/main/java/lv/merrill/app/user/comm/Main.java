@@ -1,4 +1,4 @@
-package lv.merrill.apprentissage.user.comm;
+package lv.merrill.app.user.comm;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;

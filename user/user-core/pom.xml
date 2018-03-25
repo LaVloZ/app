@@ -12,7 +12,11 @@
 		<dependency>
 			<groupId>lv.merrill.app</groupId>
 			<artifactId>shared-domain</artifactId>
-			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>lv.merrill.app</groupId>
+			<artifactId>couchdb-client</artifactId>
 		</dependency>
 
 		<dependency>

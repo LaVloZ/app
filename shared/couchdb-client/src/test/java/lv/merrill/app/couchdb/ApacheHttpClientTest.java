@@ -19,7 +19,7 @@ public class ApacheHttpClientTest {
 
 	@Test
 	public void getResource() throws MalformedCouchDbResourceException, MalformedURLException {
-		ResourceImpl<?> resource = (ResourceImpl<?>) client.getResource("test");
+		CrudResource<?> resource = (CrudResource<?>) client.getResource("test");
 		URL expected = new URL(TestUtil.DUMMY_URL + "/test");
 		URL actual = resource.getTarget();
 		assertThat(actual).isEqualTo(expected);

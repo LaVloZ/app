@@ -9,6 +9,4 @@ public interface Resource<T> {
 	public void update(CouchDbId id, T value) throws CouchDbException;
 
 	public void remove(CouchDbId id) throws CouchDbException;
-
-	public CouchDbId nextId() throws CouchDbException;
 }

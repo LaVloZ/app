@@ -28,6 +28,10 @@
 		<framework.version.junit.platform>1.1.0</framework.version.junit.platform>
 		<lib.version.mockito.core>2.16.0</lib.version.mockito.core>
 		<lib.version.catch.exception>1.2.0</lib.version.catch.exception>
+
+		<module.version.shared.domain>1.0</module.version.shared.domain>
+		<module.version.shared.ms>1.0</module.version.shared.ms>
+		<module.version.couchdb.client>1.0</module.version.couchdb.client>
 	</properties>
 
 	<modules>
@@ -38,6 +42,24 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>lv.merrill.app</groupId>
+				<artifactId>shared-domain</artifactId>
+				<version>${module.version.shared.domain}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>lv.merrill.app</groupId>
+				<artifactId>shared-ms</artifactId>
+				<version>${module.version.shared.ms}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>lv.merrill.app</groupId>
+				<artifactId>couchdb-client</artifactId>
+				<version>${module.version.couchdb.client}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.apache.qpid</groupId>
 				<artifactId>qpid-amqp-1-0-client-jms</artifactId>
