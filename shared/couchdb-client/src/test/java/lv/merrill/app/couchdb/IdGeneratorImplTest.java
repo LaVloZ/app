@@ -1,8 +1,7 @@
 package lv.merrill.app.couchdb;
 
-import static com.googlecode.catchexception.CatchException.catchException;
-import static com.googlecode.catchexception.CatchException.caughtException;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -24,17 +23,17 @@ public class IdGeneratorImplTest {
 	private ApacheHttpClient client;
 
 	@BeforeEach
-	public void initTestCase() {
+	public void initTestCase() throws IOException {
 		client = mock(ApacheHttpClient.class);
 		generator = spy(new IdGeneratorImpl(client));
+
+		when(client.fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class)))
+				.thenReturn(TestUtil.DUMMY_ID);
+		when(client.getBaseUrl()).thenReturn(TestUtil.DUMMY_URL);
 	}
 
 	@Test
 	public void next() throws IOException, CouchDbException {
-		when(client.fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class)))
-				.thenReturn(TestUtil.DUMMY_ID);
-		when(client.getBaseUrl()).thenReturn(TestUtil.DUMMY_URL);
-
 		CouchDbId id = generator.next();
 
 		assertThat(id).isEqualTo(TestUtil.DUMMY_ID);
@@ -46,8 +45,7 @@ public class IdGeneratorImplTest {
 		when(client.fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class)))
 				.thenThrow(new IOException());
 
-		catchException(generator, CouchDbException.class).next();
-		Throwable t = caughtException();
+		Throwable t = assertThrows(CouchDbException.class, generator::next);
 		assertThat(t).isInstanceOfAny(CouchDbException.class);
 		Throwable c = t.getCause();
 		assertThat(c).isInstanceOf(IOException.class);

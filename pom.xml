@@ -27,7 +27,6 @@
 		<framework.version.junit.jupiter>5.1.0</framework.version.junit.jupiter>
 		<framework.version.junit.platform>1.1.0</framework.version.junit.platform>
 		<lib.version.mockito.core>2.16.0</lib.version.mockito.core>
-		<lib.version.catch.exception>1.2.0</lib.version.catch.exception>
 
 		<module.version.shared.domain>1.0</module.version.shared.domain>
 		<module.version.shared.ms>1.0</module.version.shared.ms>
@@ -133,13 +132,6 @@
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-core</artifactId>
 				<version>${lib.version.mockito.core}</version>
-				<scope>test</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>com.googlecode.catch-exception</groupId>
-				<artifactId>catch-exception</artifactId>
-				<version>${lib.version.catch.exception}</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
