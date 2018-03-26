@@ -4,8 +4,6 @@ import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -28,16 +26,6 @@ public class Main {
 			connection.start();
 
 			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			
-			MessageConsumer createConsumer = session.createConsumer(createDestination);
-			MessageProducer createProducer = session.createProducer(createDestination);
-			UserCreationDemandeConsumerListener creationListener = new UserCreationDemandeConsumerListener(createProducer);
-			createConsumer.setMessageListener(creationListener);
-			
-			MessageConsumer getAllConsumer = session.createConsumer(getAllDestination);
-			MessageProducer getAllProducer = session.createProducer(getAllDestination);
-			UserGetAllConsumer getAllListener = new UserGetAllConsumer(getAllProducer);
-			getAllConsumer.setMessageListener(getAllListener);
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}
