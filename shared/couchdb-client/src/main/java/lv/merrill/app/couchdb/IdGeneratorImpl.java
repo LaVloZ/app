@@ -3,12 +3,15 @@ package lv.merrill.app.couchdb;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 
 class IdGeneratorImpl implements IdGenerator {
-	
+
 	private static final String UUID_ENDPOINT_PATTERN = "%s/_uuid/";
 
 	private ApacheHttpClient client;
@@ -16,11 +19,7 @@ class IdGeneratorImpl implements IdGenerator {
 
 	IdGeneratorImpl(ApacheHttpClient client) {
 		this.client = client;
-	}
-
-	@Override
-	public Iterator<CouchDbId> iterator() {
-		return iteratorAdapter;
+		iteratorAdapter = new IteratorAdapter();
 	}
 
 	@Override
@@ -50,5 +49,16 @@ class IdGeneratorImpl implements IdGenerator {
 				throw new IllegalStateException(e);
 			}
 		}
+	}
+
+	@Override
+	public Iterator<CouchDbId> iterator() {
+		return iteratorAdapter;
+	}
+
+	@Override
+	public Stream<CouchDbId> stream() {
+		Spliterator<CouchDbId> spliterator = spliterator();
+		return StreamSupport.stream(spliterator, true);
 	}
 }

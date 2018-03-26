@@ -26,4 +26,6 @@ class TestUtil {
 	static final HttpClient HTTP_CLIENT = HttpClientBuilder.create().build();
 
 	static final Jsonb JSONB = JsonbBuilder.create();
+
+	static final CouchDbId DUMMY_ID = new CouchDbId("id_couchdb_123456");
 }
