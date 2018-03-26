@@ -1,5 +1,7 @@
 package lv.merrill.app.couchdb;
 
+import static com.googlecode.catchexception.CatchException.catchException;
+import static com.googlecode.catchexception.CatchException.caughtException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -37,6 +39,18 @@ public class IdGeneratorImplTest {
 
 		assertThat(id).isEqualTo(TestUtil.DUMMY_ID);
 		verify(client).fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class));
+	}
+
+	@Test
+	public void nextException() throws IOException, CouchDbException {
+		when(client.fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class)))
+				.thenThrow(new IOException());
+
+		catchException(generator, CouchDbException.class).next();
+		Throwable t = caughtException();
+		assertThat(t).isInstanceOfAny(CouchDbException.class);
+		Throwable c = t.getCause();
+		assertThat(c).isInstanceOf(IOException.class);
 	}
 
 	@Test
