@@ -1,7 +1,6 @@
 package lv.merrill.app.couchdb;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
+import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +16,7 @@ public class BuilderTest {
 	@Test
 	public void newClient() {
 		Client client = builder.newClient();
-		assertThat(client).isNotNull();
+		
+		BDDAssertions.then(client).isNotNull();
 	}
 }

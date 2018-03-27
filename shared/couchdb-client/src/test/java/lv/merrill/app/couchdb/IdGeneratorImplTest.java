@@ -4,16 +4,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
 import org.apache.http.client.methods.HttpUriRequest;
+import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,9 +28,9 @@ public class IdGeneratorImplTest {
 		client = mock(ApacheHttpClient.class);
 		generator = spy(new IdGeneratorImpl(client));
 
-		when(client.fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class)))
-				.thenReturn(TestUtil.DUMMY_ID);
-		when(client.getBaseUrl()).thenReturn(TestUtil.DUMMY_URL);
+		given(client.fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class)))
+				.willReturn(TestUtil.DUMMY_ID);
+		given(client.getBaseUrl()).willReturn(TestUtil.DUMMY_URL);
 	}
 
 	@Test
@@ -37,31 +38,31 @@ public class IdGeneratorImplTest {
 		CouchDbId id = generator.next();
 
 		assertThat(id).isEqualTo(TestUtil.DUMMY_ID);
-		verify(client).fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class));
+		then(client).should().fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class));
 	}
 
 	@Test
 	public void nextException() throws IOException, CouchDbException {
-		when(client.fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class)))
-				.thenThrow(new IOException());
+		given(client.fetchFromRequestAndParseContent(any(HttpUriRequest.class), eq(CouchDbId.class)))
+				.willThrow(new IOException());
 
 		Throwable t = assertThrows(CouchDbException.class, generator::next);
-		assertThat(t).isInstanceOfAny(CouchDbException.class);
+		BDDAssertions.then(t).isInstanceOfAny(CouchDbException.class);
 		Throwable c = t.getCause();
-		assertThat(c).isInstanceOf(IOException.class);
+		BDDAssertions.then(c).isInstanceOf(IOException.class);
 	}
 
 	@Test
 	public void iterator() {
 		Iterator<CouchDbId> iterator = generator.iterator();
 
-		assertThat(iterator).isNotNull();
+		BDDAssertions.then(iterator).isNotNull();
 	}
 
 	@Test
 	public void stream() {
 		Stream<CouchDbId> stream = generator.stream();
 
-		assertThat(stream).isNotNull();
+		BDDAssertions.then(stream).isNotNull();
 	}
 }

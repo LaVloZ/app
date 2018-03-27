@@ -1,10 +1,9 @@
 package lv.merrill.app.couchdb;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +19,9 @@ public class ApacheHttpClientTest {
 	@Test
 	public void getResource() throws MalformedCouchDbResourceException, MalformedURLException {
 		CrudResource<?> resource = (CrudResource<?>) client.getResource("test");
+		
 		URL expected = new URL(TestUtil.DUMMY_URL + "/test");
 		URL actual = resource.getTarget();
-		assertThat(actual).isEqualTo(expected);
+		BDDAssertions.then(actual).isEqualTo(expected);
 	}
 }
