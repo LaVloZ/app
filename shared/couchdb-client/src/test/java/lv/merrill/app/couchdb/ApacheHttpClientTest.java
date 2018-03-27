@@ -17,11 +17,11 @@ public class ApacheHttpClientTest {
 	}
 
 	@Test
-	public void getResource() throws MalformedCouchDbResourceException, MalformedURLException {
-		CrudResource<?> resource = (CrudResource<?>) client.getResource("test");
+	public void getDatabase() throws MalformedCouchDbDatabaseException, MalformedURLException {
+		CrudDatabase<?> database = (CrudDatabase<?>) client.getDatabase("test");
 		
 		URL expected = new URL(TestUtil.DUMMY_URL + "/test");
-		URL actual = resource.getTarget();
+		URL actual = database.getTarget();
 		BDDAssertions.then(actual).isEqualTo(expected);
 	}
 }

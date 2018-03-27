@@ -12,15 +12,19 @@ import org.apache.http.impl.client.HttpClientBuilder;
 class TestUtil {
 
 	static final URL DUMMY_URL;
+	static final URL DUMMY_DATABASE_URL;
 
 	static {
 		URL url = null;
+		URL databaseUrl = null;
 		try {
 			url = new URL("http:/localhost:8080/");
+			url = new URL("http:/localhost:8080/test/");
 		} catch (MalformedURLException e) {
 			// Ignored.
 		}
 		DUMMY_URL = url;
+		DUMMY_DATABASE_URL = databaseUrl;
 	}
 
 	static final HttpClient HTTP_CLIENT = HttpClientBuilder.create().build();

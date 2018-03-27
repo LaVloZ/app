@@ -7,9 +7,9 @@ import java.net.URL;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 
-class CrudResource<T> extends AbstractResource<T> implements Resource<T> {
+class CrudDatabase<T> extends AbstractDatabase<T> implements Database<T> {
 
-	CrudResource(URL target, ApacheHttpClient client) throws URISyntaxException {
+	CrudDatabase(URL target, ApacheHttpClient client) throws URISyntaxException {
 		super(target, client);
 	}
 

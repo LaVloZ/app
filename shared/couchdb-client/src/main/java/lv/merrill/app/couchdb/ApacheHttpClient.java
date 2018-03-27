@@ -29,14 +29,14 @@ class ApacheHttpClient implements Client {
 	}
 
 	@Override
-	public <T> Resource<T> getResource(String resource) throws MalformedCouchDbResourceException {
+	public <T> Database<T> getDatabase(String database) throws MalformedCouchDbDatabaseException {
 		try {
 			String baseUrlString = baseUrl.toString();
-			String targetFormatted = String.format(TARGET_PATTERN, baseUrlString, resource);
+			String targetFormatted = String.format(TARGET_PATTERN, baseUrlString, database);
 			URL target = new URL(targetFormatted);
-			return new CrudResource<T>(target, this);
+			return new CrudDatabase<T>(target, this);
 		} catch (MalformedURLException | URISyntaxException e) {
-			throw new MalformedCouchDbResourceException(e);
+			throw new MalformedCouchDbDatabaseException(e);
 		}
 	}
 

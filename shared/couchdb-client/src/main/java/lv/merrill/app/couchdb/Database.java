@@ -1,6 +1,6 @@
 package lv.merrill.app.couchdb;
 
-public interface Resource<T> {
+public interface Database<T> {
 
 	public T get(CouchDbId id, Class<T> clazz) throws CouchDbException;
 
