@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 
 class CrudDatabase<T> extends AbstractDatabase<T> implements Database<T> {
@@ -25,15 +27,34 @@ class CrudDatabase<T> extends AbstractDatabase<T> implements Database<T> {
 
 	@Override
 	public CouchDbId save(T value) throws CouchDbException {
-		return null;
+		try {
+			HttpPost request = new HttpPost(targetUri);
+			request.setHeader("Content-Type", "application/json");
+			HttpEntity body = new JsonbHttpEntity();
+			request.setEntity(body);
+			return client.fetchFromRequestAndParseContent(request, CouchDbId.class);
+		} catch (IOException e) {
+			throw new CouchDbException(e);
+		}
 	}
 
 	@Override
 	public void update(CouchDbId id, T value) throws CouchDbException {
-
+		try {
+			HttpUriRequest request = new HttpPost(targetUri);
+			client.fetchFromRequestAndParseContent(request, CouchDbId.class);
+		} catch (IOException e) {
+			throw new CouchDbException(e);
+		}
 	}
 
 	@Override
 	public void remove(CouchDbId id) throws CouchDbException {
+		try {
+			HttpUriRequest request = new HttpPost(targetUri);
+			client.fetchFromRequestAndParseContent(request, CouchDbId.class);
+		} catch (IOException e) {
+			throw new CouchDbException(e);
+		}
 	}
 }

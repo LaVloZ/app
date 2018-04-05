@@ -18,8 +18,8 @@ class TestUtil {
 		URL url = null;
 		URL databaseUrl = null;
 		try {
-			url = new URL("http:/localhost:8080/");
-			url = new URL("http:/localhost:8080/test/");
+			url = new URL("http://127.0.0.1:8080/");
+			databaseUrl = new URL("http://127.0.0.1:8080/test/");
 		} catch (MalformedURLException e) {
 			// Ignored.
 		}
